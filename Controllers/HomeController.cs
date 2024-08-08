@@ -1,5 +1,4 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using PersonalWebsite.Models;
 using System.Diagnostics;
 
 namespace PersonalWebsite.Controllers
