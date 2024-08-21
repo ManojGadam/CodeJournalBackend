@@ -11,8 +11,8 @@ using PersonalWebsite.Context;
 namespace PersonalWebsite.Migrations
 {
     [DbContext(typeof(ProblemContext))]
-    [Migration("20240810042659_ProblemInitial")]
-    partial class ProblemInitial
+    [Migration("20240814201335_problemRepo")]
+    partial class problemRepo
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -36,18 +36,16 @@ namespace PersonalWebsite.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Difficulty")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Link")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Name")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<float>("ProblemNumber")
-                        .HasColumnType("real");
+                    b.Property<string>("TitleSlug")
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 

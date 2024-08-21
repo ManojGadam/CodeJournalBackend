@@ -1,6 +1,12 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Options;
 using PersonalWebsite.Context;
 using PersonalWebsite.Models;
+using Microsoft.Playwright;
+using System.Reflection.Metadata;
+using static System.Net.WebRequestMethods;
+using Azure.Core;
+using System.Net.Http;
 
 namespace PersonalWebsite.Repository
 {
@@ -8,7 +14,8 @@ namespace PersonalWebsite.Repository
     public interface IProblemRepository
     {
        Task<Boolean> SaveProblem(Problem problem);
-        Task<List<Problem>> GetProblems(); 
+        Task<List<Problem>> GetProblems();
+       // Task<String?> Scrape(String url);
     }
     public class ProblemRepository : IProblemRepository
     {
@@ -37,5 +44,6 @@ namespace PersonalWebsite.Repository
             var problems  = await _context.Problems.ToListAsync();
             return problems;
         }
+
     }
 }

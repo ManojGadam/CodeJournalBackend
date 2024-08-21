@@ -33,18 +33,16 @@ namespace PersonalWebsite.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Difficulty")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Link")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Name")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<float>("ProblemNumber")
-                        .HasColumnType("real");
+                    b.Property<string>("TitleSlug")
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 

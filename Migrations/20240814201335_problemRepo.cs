@@ -5,7 +5,7 @@
 namespace PersonalWebsite.Migrations
 {
     /// <inheritdoc />
-    public partial class ProblemInitial : Migration
+    public partial class problemRepo : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -16,9 +16,9 @@ namespace PersonalWebsite.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Difficulty = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    ProblemNumber = table.Column<float>(type: "real", nullable: false),
+                    Name = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Difficulty = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    TitleSlug = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Link = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Comments = table.Column<string>(type: "nvarchar(max)", nullable: true)
                 },

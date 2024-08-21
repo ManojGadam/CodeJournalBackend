@@ -8,15 +8,16 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 builder.Services.AddSwaggerGen();
 builder.Services.AddControllers();
+builder.Services.AddHttpClient();
 builder.Services.AddScoped<IProblemRepository, ProblemRepository>();
 builder.Services.AddDbContext<ProblemContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 
 builder.Services.AddCors(options =>
 {
-    options.AddPolicy("AllowFrontend", builder =>
+    options.AddPolicy("AllowAllOrigins", builder =>
     {
-        builder.WithOrigins("http://localhost:5173") // The origin of your frontend
+        builder.AllowAnyOrigin() // The origin of your frontend
                .AllowAnyHeader()
                .AllowAnyMethod();
     });
@@ -32,7 +33,7 @@ if (!app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
-app.UseCors("AllowFrontend");
+app.UseCors("AllowAllOrigins");
 app.UseRouting();
 app.UseSwagger();
 
