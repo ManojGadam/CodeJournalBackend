@@ -2,11 +2,7 @@
 using Microsoft.Extensions.Options;
 using PersonalWebsite.Context;
 using PersonalWebsite.Models;
-using Microsoft.Playwright;
-using System.Reflection.Metadata;
-using static System.Net.WebRequestMethods;
-using Azure.Core;
-using System.Net.Http;
+
 
 namespace PersonalWebsite.Repository
 {
@@ -15,7 +11,8 @@ namespace PersonalWebsite.Repository
     {
        Task<Boolean> SaveProblem(Problem problem);
         Task<List<Problem>> GetProblems();
-       // Task<String?> Scrape(String url);
+        Task SaveConfiguration(Config config);
+        Task<Config> GetConfiguration();
     }
     public class ProblemRepository : IProblemRepository
     {
@@ -44,6 +41,25 @@ namespace PersonalWebsite.Repository
             var problems  = await _context.Problems.ToListAsync();
             return problems;
         }
+        public async Task SaveConfiguration(Config config)
+        {
+            var configAv = await _context.Config.FirstOrDefaultAsync();
+            if (configAv!=null)
+            {
+                configAv.LeetToken = config.LeetToken;
+                configAv.GitURL = config.GitURL;
+                config.GitToken = configAv.GitToken;
+                await _context.SaveChangesAsync();
+                return;
+            }
+            _context.Config.Add(config);
+            await _context.SaveChangesAsync();
+        }
 
+        public async Task<Config> GetConfiguration()
+        {
+            var config = await _context.Config.FirstAsync();
+            return config;
+        }
     }
 }

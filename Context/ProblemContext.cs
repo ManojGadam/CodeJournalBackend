@@ -10,6 +10,7 @@ namespace PersonalWebsite.Context
             
         }
         public DbSet<Problem> Problems { get; set; }
+        public DbSet<Config> Config { get; set; }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
