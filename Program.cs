@@ -26,22 +26,31 @@ builder.Services.AddCors(options =>
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
-if (!app.Environment.IsDevelopment())
+if (app.Environment.IsDevelopment())
+{
+    app.UseSwagger();
+
+    app.UseSwaggerUI(c =>
+    {
+        c.SwaggerEndpoint("/swagger/v1/swagger.json", "My API V1");
+        c.RoutePrefix = string.Empty; // Set Swagger UI at the app's root
+    });
+}
+else
 {
     app.UseExceptionHandler("/Home/Error");
-    // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
+
+    // Consider using HSTS in production
+    app.UseHsts();
+
+    // Enable HTTPS redirection unless running behind a proxy that handles HTTPS
+    app.UseHttpsRedirection();
 }
 
-app.UseHttpsRedirection();
+
 app.UseCors("AllowAllOrigins");
 app.UseRouting();
-app.UseSwagger();
 
-app.UseSwaggerUI(c =>
-{
-    c.SwaggerEndpoint("/swagger/v1/swagger.json", "My API V1");
-    c.RoutePrefix = string.Empty; // Set Swagger UI at the app's root
-});
 
 app.UseAuthorization();
 
